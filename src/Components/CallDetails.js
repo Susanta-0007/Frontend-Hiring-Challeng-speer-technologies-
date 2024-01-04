@@ -19,24 +19,24 @@ const CallDetails = () => {
     // console.log(callId);
     const API = "https://cerulean-marlin-wig.cyclic.app/activities/";
     const [calldata, setCalldata] = useState([]);
+
     useEffect(() => {
-        
+        const fetchData = async () => {
+            try {
+                const data = await fetch(API + callId);
+                const json = await data.json();
+                setCalldata(json);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
         fetchData();
-        //Calling
-
     }, [callId]);
-    const fetchData = async () => {
-        try {
-            const data = await fetch(API + callId);
-            const json = await data.json();
-            setCalldata(json);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    }
-    console.log(calldata);
 
-    
+
+
+
 
 
     if (!calldata) {
@@ -46,12 +46,12 @@ const CallDetails = () => {
     const dateString = calldata.created_at;
     const dateObject = new Date(dateString);
 
-  
+
     const year = dateObject.getFullYear();
-    const month = dateObject.getMonth() + 1; 
+    const month = dateObject.getMonth() + 1;
     const day = dateObject.getDate();
 
- 
+
     const hours = dateObject.getHours();
     const minutes = dateObject.getMinutes();
 
@@ -62,7 +62,7 @@ const CallDetails = () => {
     const date = `${year}-${month}-${day}`;
     const time = `${formattedHours}:${minutes} ${ampm}`
 
-    return calldata.length===0 ? <ShimmerDetails/> : (
+    return calldata.length === 0 ? <ShimmerDetails /> : (
         <div className=' w-[90%] m-auto mt-2 flex flex-col gap-2 p-2 mb-10'>
             <div className='flex text-xl rounded-md p-2 gap-5 border-[1px] border-solid border-gray-400'>
                 <p className='text-lg font-semibold text-gray-400'>Call id :</p>
