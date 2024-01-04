@@ -22,13 +22,17 @@ const CallDetails = () => {
     useEffect(() => {
         
         fetchData();
+        //Calling
 
     }, [callId]);
     const fetchData = async () => {
-        const data = await fetch(API + callId)
-
-        const json = await data.json();
-        setCalldata(json);
+        try {
+            const data = await fetch(API + callId);
+            const json = await data.json();
+            setCalldata(json);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
     }
     console.log(calldata);
 
