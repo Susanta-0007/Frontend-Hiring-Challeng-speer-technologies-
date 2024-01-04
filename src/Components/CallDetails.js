@@ -23,7 +23,7 @@ const CallDetails = () => {
         
         fetchData();
 
-    }, []);
+    }, [callId]);
     const fetchData = async () => {
         const data = await fetch(API + callId)
 
