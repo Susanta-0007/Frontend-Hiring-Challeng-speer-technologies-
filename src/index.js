@@ -19,7 +19,7 @@ const AppLayout = () => {
                     <Route path="/" element={<Body />} />
                 </Routes>
             </div>
-            <Footer  />
+            <Footer />
         </div>
 
     )
@@ -28,7 +28,10 @@ const AppLayout = () => {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
     <BrowserRouter>
-        <AppLayout />
+        <React.StrictMode>
+            <AppLayout />
+        </React.StrictMode>
     </BrowserRouter>
 );
